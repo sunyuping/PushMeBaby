@@ -11,6 +11,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9BBE8C0C19D8095700AD141D /* aps_development.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9BBE8C0B19D8091800AD141D /* aps_development.cer */; };
+		9BBE8C0E19D80A0200AD141D /* aps_production.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9BBE8C0D19D809FF00AD141D /* aps_production.cer */; };
 		A690E0150F8BA56300CEA7C7 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A690E0140F8BA56300CEA7C7 /* ApplicationDelegate.m */; };
 		A690E01D0F8BA57E00CEA7C7 /* ioSock.c in Sources */ = {isa = PBXBuildFile; fileRef = A690E01C0F8BA57E00CEA7C7 /* ioSock.c */; };
 		A690E05D0F8BA8C800CEA7C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A690E05C0F8BA8C800CEA7C7 /* Security.framework */; };
@@ -27,6 +29,8 @@
 		32CA4F630368D1EE00C91783 /* PushMeBaby_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMeBaby_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* PushMeBaby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushMeBaby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BBE8C0B19D8091800AD141D /* aps_development.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_development.cer; sourceTree = "<group>"; };
+		9BBE8C0D19D809FF00AD141D /* aps_production.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_production.cer; sourceTree = "<group>"; };
 		A690E0130F8BA56300CEA7C7 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationDelegate.h; path = Classes/ApplicationDelegate.h; sourceTree = "<group>"; };
 		A690E0140F8BA56300CEA7C7 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplicationDelegate.m; path = Classes/ApplicationDelegate.m; sourceTree = "<group>"; };
 		A690E01B0F8BA57E00CEA7C7 /* ioSock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioSock.h; path = Classes/ioSock.h; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		29B97314FDCFA39411CA2CEA /* PushMeBaby */ = {
 			isa = PBXGroup;
 			children = (
+				9BBE8C0D19D809FF00AD141D /* aps_production.cer */,
+				9BBE8C0B19D8091800AD141D /* aps_development.cer */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -175,6 +181,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBE8C0E19D80A0200AD141D /* aps_production.cer in Resources */,
+				9BBE8C0C19D8095700AD141D /* aps_development.cer in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 			);

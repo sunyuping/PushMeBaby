@@ -8,6 +8,9 @@
 
 #import "ApplicationDelegate.h"
 
+
+#define ADHOC   1
+
 @interface ApplicationDelegate ()
 #pragma mark Properties
 @property(nonatomic, retain) NSString *deviceToken, *payload, *certificate;
@@ -23,9 +26,18 @@
 - (id)init {
 	self = [super init];
 	if(self != nil) {
-		self.deviceToken = @"";
+#ifdef ADHOC
+        self.deviceToken = @"0bc199a7 7a3032d8 3315da5e 8ee04a82 74c2a4e1 478cae7e ed19e2f3 eb3b43dc";
+#else
+        self.deviceToken = @"6c83ccdd 97bc2325 5e71027e 9c1a8ef9 22cf4f0d f8ed6e75 4b3cf221 00248de0";
+#endif
 		self.payload = @"{\"aps\":{\"alert\":\"This is some fancy message.\",\"badge\":1}}";
-		self.certificate = [[NSBundle mainBundle] pathForResource:@"apns" ofType:@"cer"];
+        
+#ifdef ADHOC
+		self.certificate = [[NSBundle mainBundle] pathForResource:@"aps_production" ofType:@"cer"];
+#else
+        self.certificate = [[NSBundle mainBundle] pathForResource:@"aps_development" ofType:@"cer"];
+#endif
 	}
 	return self;
 }
@@ -76,8 +88,14 @@
 	
 	// Establish connection to server.
 	PeerSpec peer;
-	result = MakeServerConnection("gateway.sandbox.push.apple.com", 2195, &socket, &peer);// NSLog(@"MakeServerConnection(): %d", result);
-	
+    
+#ifdef ADHOC
+    result = MakeServerConnection("gateway.push.apple.com", 2195, &socket, &peer);
+#else
+    result = MakeServerConnection("gateway.sandbox.push.apple.com", 2195, &socket, &peer);//
+#endif
+//    NSLog(@"MakeServerConnection(): %d", result);
+    
 	// Create new SSL context.
 	result = SSLNewContext(false, &context);// NSLog(@"SSLNewContext(): %d", result);
 	
@@ -88,8 +106,15 @@
 	result = SSLSetConnection(context, socket);// NSLog(@"SSLSetConnection(): %d", result);
 	
 	// Set server domain name.
-	result = SSLSetPeerDomainName(context, "gateway.sandbox.push.apple.com", 30);// NSLog(@"SSLSetPeerDomainName(): %d", result);
-	
+    
+    
+#ifdef ADHOC
+    result = SSLSetPeerDomainName(context, "gateway.push.apple.com", 22);
+#else
+    result = SSLSetPeerDomainName(context, "gateway.sandbox.push.apple.com", 30);
+#endif
+//	NSLog(@"SSLSetPeerDomainName(): %d", result);
+    
 	// Open keychain.
 	result = SecKeychainCopyDefault(&keychain);// NSLog(@"SecKeychainOpen(): %d", result);
 	
@@ -101,16 +126,19 @@
         NSLog (@"SecCertificateCreateWithData failled");
     
 	// Create identity.
-	result = SecIdentityCreateWithCertificate(keychain, certificate, &identity);// NSLog(@"SecIdentityCreateWithCertificate(): %d", result);
+	result = SecIdentityCreateWithCertificate(keychain, certificate, &identity);
+    NSLog(@"SecIdentityCreateWithCertificate(): %d", result);
 	
 	// Set client certificate.
 	CFArrayRef certificates = CFArrayCreate(NULL, (const void **)&identity, 1, NULL);
-	result = SSLSetCertificate(context, certificates);// NSLog(@"SSLSetCertificate(): %d", result);
+	result = SSLSetCertificate(context, certificates);
+     NSLog(@"SSLSetCertificate(): %d", result);
 	CFRelease(certificates);
 	
 	// Perform SSL handshake.
 	do {
-		result = SSLHandshake(context);// NSLog(@"SSLHandshake(): %d", result);
+		result = SSLHandshake(context);
+        NSLog(@"SSLHandshake(): %d", result);
 	} while(result == errSSLWouldBlock);
 	
 }
